@@ -5,11 +5,11 @@ const {requiredUserLogin, requiredAdmin} = require('../controllers/userControlle
 const router = express.Router();
 
 router.get("/forums" , getAllForums);
-router.post("/create" ,requiredUserLogin, create);
+router.post("/create" , create);
 router.get("/forum/:uuid" , getSingleForum);
-router.post("/myforum",requiredUserLogin, getMyForum);
-router.post("/deletebyuser",requiredUserLogin,deleteForumByUser);
-router.put("/edit/:uuid",requiredUserLogin, updateForum);
-router.post("/deletebyadmin",requiredAdmin,deleteForumByAdmin);
+router.post("/myforum", getMyForum);
+router.post("/deletebyuser",deleteForumByUser);
+router.put("/edit/:uuid", updateForum);
+router.post("/deletebyadmin",deleteForumByAdmin);
 
 module.exports = router;
