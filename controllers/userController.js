@@ -68,7 +68,7 @@ const login = async (req, res) => {
             id: user._id
         }, process.env.JWT_SECRET, { expiresIn: maxAge * 1000 });
         res
-          .cookie("token", token, { maxAge: maxAge * 1000, secure: true,httpOnly : true })
+          .cookie("token", token, { maxAge: maxAge * 1000, secure: false,httpOnly : false })
           .json({ username: user.username, role: user.role });
     } else {
         res.status(400).json({ msg: "ชื่อผู้ใช้ หรือ รหัสผ่าน ผิด" });
