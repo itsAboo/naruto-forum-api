@@ -75,16 +75,16 @@ const login = async (req, res) => {
     }
 }
 const authUser = (req, res) => {
-    const { token } = req.cookies;
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-            if (err) throw err;
-            const { username, role } = await User.findById(userData.id)
-            res.json({ username, role })
-        })
-    } else {
-        res.json(null)
-    }
+    // const { token } = req.cookies;
+    // if (token) {
+    //     jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
+    //         if (err) throw err;
+    //         const { username, role } = await User.findById(userData.id)
+    //         res.json({ username, role })
+    //     })
+    // } else {
+    //     res.json(null)
+    // }
 }
 
 const logout = (req,res)=>{
@@ -92,30 +92,30 @@ const logout = (req,res)=>{
 }
 
 const requiredUserLogin = (req,res,next)=>{
-    const {token} = req.cookies;
-    if (token) {
-      jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-        if (err) throw err;
-        next();
-      });
-    } else {
-      res.status(404).json({error:"เกิดข้อผิดพลาด",notCookie : true});
-    }
+    // const {token} = req.cookies;
+    // if (token) {
+    //   jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
+    //     if (err) throw err;
+    //     next();
+    //   });
+    // } else {
+    //   res.status(404).json({error:"เกิดข้อผิดพลาด",notCookie : true});
+    // }
 }
 
 const requiredAdmin = (req,res,next)=>{
-    const {token} = req.cookies;
-    if(token){
-        jwt.verify(token,process.env.JWT_SECRET , {}, (err,userData)=>{
-            if(err) throw err;
-            if(userData.role === "admin"){
-                next();
-            }else{
-                res.status(400).json({msg:"คุณไม่มีสิทธิ์เข้าถึง",error : true});
-            }
-        })
-    }else{
-        res.status(404).json({error:"เกิดข้อผิดพลาด",notCookie:true});
-    }
+    // const {token} = req.cookies;
+    // if(token){
+    //     jwt.verify(token,process.env.JWT_SECRET , {}, (err,userData)=>{
+    //         if(err) throw err;
+    //         if(userData.role === "admin"){
+    //             next();
+    //         }else{
+    //             res.status(400).json({msg:"คุณไม่มีสิทธิ์เข้าถึง",error : true});
+    //         }
+    //     })
+    // }else{
+    //     res.status(404).json({error:"เกิดข้อผิดพลาด",notCookie:true});
+    // }
 }
 module.exports = { register, login, authUser , logout , requiredUserLogin ,requiredAdmin }
